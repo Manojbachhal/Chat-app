@@ -1,0 +1,229 @@
+<div class="container bg-green-400" id="container" #container>
+  <div class="form-container sign-up-container bg-white">
+    <div class="m-4 flex absolute right-0 top-4">
+      <h3 class="text-4xl font-thin">ChatSphere</h3>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="red"
+        class="bi bi-balloon-heart-fill"
+        viewBox="0 0 16 16"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M8.49 10.92C19.412 3.382 11.28-2.387 8 .986 4.719-2.387-3.413 3.382 7.51 10.92l-.234.468a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2 2 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.235-.468ZM6.726 1.269c-1.167-.61-2.8-.142-3.454 1.135-.237.463-.36 1.08-.202 1.85.055.27.467.197.527-.071.285-1.256 1.177-2.462 2.989-2.528.234-.008.348-.278.14-.386"
+        />
+      </svg>
+    </div>
+    <form
+      action="#"
+      class="max-w-lg mx-auto"
+      [formGroup]="registerForm"
+      (ngSubmit)="registerSubmit()"
+    >
+      <div class="mb-6">
+        <h1 class="text-4xl font-light mb-3">Welcome Back!</h1>
+
+        <h1 class="text-slate-500 text-center text-2xl font-light">
+          Create Account to continue to ChatSphere.
+        </h1>
+      </div>
+
+      <input
+        type="text"
+        placeholder="Name"
+        formControlName="name"
+        autocomplete="name"
+        required
+        class="w-full mb-3 px-4 py-2 text-md border border-gray-300 rounded outline-none focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
+      />
+      <input
+        type="email"
+        placeholder="Email"
+        formControlName="email"
+        autocomplete="email"
+        required
+        class="w-full mb-3 px-4 py-2 text-md border border-gray-300 rounded outline-none focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        formControlName="password"
+        autocomplete="password"
+        required="true"
+        class="w-full mb-3 px-4 py-2 text-md border border-gray-300 rounded outline-none focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
+      />
+      <p
+        class="text-red-600 text-lg font-thin text-start pt-1"
+        *ngIf="
+        registerForm.controls['email'].touched &&
+        registerForm.controls['email'].errors?.['gmail']
+      "
+      >
+        Enter a valid email address
+      </p>
+
+      <button
+        class="w-32 text-white p-2 font-light text-lg focus:ring-transparent bg-blue-500 hover:bg-blue-600"
+      >
+        Sign Up
+      </button>
+    </form>
+    <div
+      class="absolute bottom-0 left-[24%] font-light w-100 text-1xl text-slate-500 p-4"
+    >
+      <p class="mb-0 flex justify-center text-lg">
+        © 2024 ChatSphere. Crafted with
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="red"
+          class="bi bi-balloon-heart-fill"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8.49 10.92C19.412 3.382 11.28-2.387 8 .986 4.719-2.387-3.413 3.382 7.51 10.92l-.234.468a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2 2 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.235-.468ZM6.726 1.269c-1.167-.61-2.8-.142-3.454 1.135-.237.463-.36 1.08-.202 1.85.055.27.467.197.527-.071.285-1.256 1.177-2.462 2.989-2.528.234-.008.348-.278.14-.386"
+          />
+        </svg>
+        by Manoj Bachhal
+      </p>
+    </div>
+  </div>
+  <div class="form-container sign-in-container w-full bg-white">
+    <div class="m-4 flex absolute top-4">
+      <h3 class="text-4xl font-thin">ChatSphere</h3>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="red"
+        class="bi bi-balloon-heart-fill"
+        viewBox="0 0 16 16"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M8.49 10.92C19.412 3.382 11.28-2.387 8 .986 4.719-2.387-3.413 3.382 7.51 10.92l-.234.468a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2 2 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.235-.468ZM6.726 1.269c-1.167-.61-2.8-.142-3.454 1.135-.237.463-.36 1.08-.202 1.85.055.27.467.197.527-.071.285-1.256 1.177-2.462 2.989-2.528.234-.008.348-.278.14-.386"
+        />
+      </svg>
+    </div>
+    <form
+      action="#"
+      class="max-w-lg mx-auto"
+      [formGroup]="loginForm"
+      (ngSubmit)="loginSubmit()"
+    >
+      <div class="mb-6">
+        <h1 class="text-4xl font-light mb-3">Welcome Back!</h1>
+
+        <h1 class="text-slate-500 text-center text-2xl font-light">
+          Sign in to continue to ChatSphere.
+        </h1>
+      </div>
+
+      <div class="mb-3 w-full">
+        <input
+          type="email"
+          placeholder="name@gmail.com"
+          autocomplete="email"
+          class="w-full px-4 py-2 text-md border border-gray-300 rounded outline-none focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
+          formControlName="email"
+        />
+
+        <p
+          class="text-red-600 text-lg font-thin text-start pt-1"
+          *ngIf="
+            loginForm.controls['email'].touched &&
+            loginForm.controls['email'].errors?.['required']
+          "
+        >
+          Email is required
+        </p>
+
+        <p
+          class="text-red-600 text-lg font-thin text-start pt-1"
+          *ngIf="
+            loginForm.controls['email'].touched &&
+            loginForm.controls['email'].errors?.['gmail']
+          "
+        >
+          Enter a valid email address
+        </p>
+      </div>
+
+      <input
+        type="password"
+        placeholder="Password"
+        autocomplete="password"
+        class="w-full px-4 py-2 mb-3 text-md border border-gray-300 rounded outline-none focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
+        formControlName="password"
+      />
+      <!-- <a href="#" class="text-slate-500 mb-3 font-thin text-md mt-3 text-slate"
+        >Forgot your password?</a
+      > -->
+      <button
+        type="submit"
+        class="w-32 text-white p-2 font-light text-lg focus:ring-transparent bg-blue-500 hover:bg-blue-600"
+      >
+        Sign In
+      </button>
+    </form>
+    <div
+      class="absolute bottom-0 left-[24%] font-light w-100 text-1xl text-slate-500 p-4"
+    >
+      <p class="mb-0 flex justify-center text-lg">
+        © 2024 ChatSphere. Crafted with
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="red"
+          class="bi bi-balloon-heart-fill"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8.49 10.92C19.412 3.382 11.28-2.387 8 .986 4.719-2.387-3.413 3.382 7.51 10.92l-.234.468a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2 2 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.235-.468ZM6.726 1.269c-1.167-.61-2.8-.142-3.454 1.135-.237.463-.36 1.08-.202 1.85.055.27.467.197.527-.071.285-1.256 1.177-2.462 2.989-2.528.234-.008.348-.278.14-.386"
+          />
+        </svg>
+        by Manoj Bachhal
+      </p>
+    </div>
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <h1 class="text-4xl font-light text-white mb-3">Welcome Back!</h1>
+        <p class="text-2xl mb-3 font-light text-white">
+          To keep connected with us please login with your personal info
+        </p>
+        <button
+          class="ghost"
+          id="signIn"
+          #signin
+          class="w-32 text-white bg-gray-500 hover:bg-blue-600 p-2"
+        >
+          Sign In
+        </button>
+      </div>
+      <div class="overlay-panel overlay-right">
+        <h1 class="text-4xl font-light text-white mb-3">
+          Don't Have An Account
+        </h1>
+        <p class="text-2xl mb-3 font-light text-white">
+          Please signup and start journey with us
+        </p>
+        <button
+          class="ghost"
+          id="signUp"
+          #signup
+          class="w-32 text-white bg-gray-500 hover:bg-blue-600 p-2"
+        >
+          Sign Up
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

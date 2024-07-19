@@ -1,0 +1,130 @@
+<div
+  class="container h-[100%] w-full p-2 sm:block dark:bg-[#00000060]"
+  [ngClass]="{ hidden: chatBoxVisibility }"
+>
+  <div class="header h-[20%] bg-emerald-200 dark:bg-[#f8fafc1f] rounded">
+    <div class="px-2 flex items-center justify-between">
+      <h5
+        class="inline-flex px-3 text-lg mt-2 font-semibold capitalize text-black dark:text-white items-center mb-4"
+      >
+        <!-- Chats -->
+        {{ loggedinUser.name }}
+      </h5>
+      <button
+        data-tip="Click a chat to start conversation"
+        class="tooltip-left tooltip-info tooltip bg-gradient-to-r from-emerald-500 to-emerald-700 dark:from-black dark:to-gray-800 rounded-full mr-2"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="white"
+          class="size-8 p-2 text-white"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 4.5v15m7.5-7.5h-15"
+          />
+        </svg>
+      </button>
+    </div>
+    <!-- </div> -->
+    <div class="m-2 grid grid-cols-3 gap-2">
+      <button
+        class="bg-gradient-to-r from-emerald-400 to-emerald-500 dark:from-black dark:to-gray-800 p-1 rounded-full text-sm text-white dark:bg-transparent"
+      >
+        Direct
+      </button>
+      <button
+        class="bg-emerald-300 dark:bg-white text-white dark:text-black rounded-full text-sm p-1"
+      >
+        Group
+      </button>
+      <button
+        class="bg-emerald-300 dark:bg-white dark:text-black rounded-full text-sm p-1 text-white"
+      >
+        Public
+      </button>
+    </div>
+  </div>
+  <div
+    class="h-[80%] m-auto overflow-y-scroll relative w-full overflow-x-hidden pt-3"
+  >
+    <div *ngFor="let contact of userData" class="mt-2">
+      <div *ngFor="let user of contact.users">
+        <div
+          *ngIf="user._id !== loggedinUser._id"
+          class="h-18 mx-1 sm:h-16 rounded-full border glass cursor-pointer hover:bg-emerald-300 dark:hover:bg-gray-700 hover:text-white"
+          (click)="startChat(contact)"
+        >
+          <div class="grid grid-cols-5 items-center justify-center p-1">
+            <div className="col-span-1 ">
+              <img
+                src="{{ user.pic }}"
+                alt=""
+                class="rounded-full w-14 p-1 m-auto"
+              />
+            </div>
+            <div class="ps-2 col-span-3">
+              <p class="px-2 text-sm tracking-wider dark:text-white">
+                {{ user.name }}
+              </p>
+              <!-- <p class="px-2 text-xs dark:text-emerald-600">
+                {{ user.email }}
+              </p> -->
+            </div>
+            <!-- medium screen button  -->
+            <div
+              class="hidden col-span-1 text-center bg-emerald-100 dark:bg-gray-100 rounded-full sm:flex justify-center items-center p-1.5 m-auto shadow-2xl"
+            >
+              <button
+                class="tooltip"
+                data-tip="Start Chat..."
+                (click)="startChat(contact)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  strokeWidth="{1.5}"
+                  class="size-4 fill-green-500 dark:fill-black"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <!-- small screen button -->
+            <div
+              class="col-span-1 text-center bg-gray-100 rounded-full sm:hidden justify-center items-center px-2 py-1.5 m-auto shadow-2xl"
+            >
+              <button
+                class="tooltip"
+                data-tip="Start Chat..."
+                (click)="startChatsm(contact)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  strokeWidth="{1.5}"
+                  class="size-4 fill-green-500 dark:fill-black"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

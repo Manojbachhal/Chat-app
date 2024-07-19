@@ -1,0 +1,200 @@
+<ng-container *ngIf="userData.users">
+  <div
+    class="h-screen flex-col sm:flex bg-white"
+    [ngClass]="{ hidden: !chatBoxVisibility }"
+  >
+    <div class="h-[10%] p-2">
+      <header *ngFor="let user of userData.users">
+        <div
+          class="mt-0 h-full flex gap-1 items-center border-b-[1px] border-emerald-100"
+          *ngIf="user._id != loggedInUser._id"
+        >
+          <button
+            class="sm:hidden mr-3 p-2 rounded-full bg-emerald-50"
+            (click)="toggleChatBox()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              strokeWidth="{1.6}"
+              class="size-5 fill-green-500 dark:fill-black stroke-green-500 dark:stroke-black"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M1.146 4.854a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H12.5A2.5 2.5 0 0 1 15 6.5v8a.5.5 0 0 1-1 0v-8A1.5 1.5 0 0 0 12.5 5H2.707l3.147 3.146a.5.5 0 1 1-.708.708z"
+              />
+            </svg>
+          </button>
+          <div
+            class="avatar w-[60px] h-[60px] p-1 online"
+            [ngClass]="{ online: user.isActive }"
+            [ngClass]="{ offline: !user.isActive }"
+          >
+            <div>
+              <img src="{{ user.pic }}" class="rounded-full" />
+            </div>
+          </div>
+          <div class="flex align-center sm:ms-2">
+            <p
+              class="ps-2 my-auto lg:text-xl md:text-xl capitalize dark:text-white"
+            >
+              {{ user.name }}
+            </p>
+          </div>
+          <!-- <div class="col-span-2"></div> -->
+        </div>
+      </header>
+    </div>
+    <div class="h-[80%]">
+      <!-- <body class=""> -->
+      <div
+        class="overflow-hidden custom-scrollbar hover:overflow-y-scroll h-full flex flex-col"
+        #chatBox
+      >
+        <div
+          *ngFor="let chat of allMessages"
+          class="flex px-3"
+          [ngClass]="{ 'justify-end': chat.sender._id === loggedInUser._id }"
+        >
+          <div class="chat chat-end justify-end">
+            <div class="chat-image avatar">
+              <div class="w-10 rounded-full">
+                <img alt="" class="w-10" src="{{ chat.sender.pic }}" />
+              </div>
+            </div>
+            <div
+              class="chat-bubble bg-green-300 dark:bg-white text-black text-sm px-3 py-1 min-h-[30px] max-w-[400px]"
+              [ngClass]="{
+                'bg-slate-100': chat.sender._id == loggedInUser._id
+              }"
+            >
+              {{ chat.content }}
+            </div>
+            <!-- <div class="chat-footer text-stone-400 text-xs"> -->
+            <!-- {{ chat.sender.name }} -->
+            <!-- <time class="text-xs opacity-50">{{ chat.createdat }}5</time> -->
+            <!-- </div> -->
+            <!-- <div className="chat-footer opacity-50">Delivered</div> -->
+          </div>
+        </div>
+      </div>
+      <!-- </body> -->
+    </div>
+    <div class="h-[10%]">
+      <footer class="h-full border-t-[1px] border-emerald-100">
+        <div class="grid grid-cols-12 h-full">
+          <div class="col-span-1 flex items-center justify-center h-full">
+            <button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="white"
+                stroke="white"
+                class="size-8 p-1 text-white"
+                stroke-width="1"
+                stroke-linecap="square"
+                stroke-linejoin="bevel"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="16"></line>
+                <line x1="8" y1="12" x2="16" y2="12"></line>
+              </svg>
+            </button>
+          </div>
+          <div class="col-span-9 flex">
+            <form
+              action=""
+              #typingForm="ngForm"
+              (ngSubmit)="sendMessage(typingForm)"
+              class="w-full flex justify-between"
+            >
+              <input
+                type="text"
+                ngModel
+                value="{{ messageValue }}"
+                name="Message"
+                class="p-2 w-[92%] focus:outline-none bg-transparent placeholder-white-500 dark:placeholder-gray-500"
+                placeholder="Type Message...."
+              />
+              <button type="submit" class="">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  strokeWidth="{1.5}"
+                  class="size-6 fill-emerald-500 dark:fill-white stroke-white dark:stroke-black"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
+                  />
+                </svg>
+              </button>
+            </form>
+          </div>
+          <div
+            class="col-span-2 flex justify-center items-center cursor-pointer"
+          >
+            <ng-container *ngIf="isEmoji">
+              <emoji-mart
+                style="position: absolute; bottom: 50px; right: 6%"
+                title="Pick your emoji…"
+                (emojiSelect)="addEmoji($event, typingForm)"
+                [hideObsolete]="true"
+                [isNative]="true"
+              >
+                ></emoji-mart
+              ></ng-container
+            >
+
+            <button
+              class="emoji-container text-2xl"
+              [ngClass]="isEmoji ? 'bg-gray-100 rounded' : ''"
+              (click)="isEmoji = !isEmoji"
+            >
+              😊
+            </button>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <!-- 
+    
+     -->
+  </div>
+</ng-container>
+<ng-container *ngIf="!userData.users">
+  <div class="shadow-2xl h-[100%] w-full hidden sm:block">
+    <div class="diff aspect-[12/6] h-full">
+      <div class="diff-item-1">
+        <div
+          style="
+            background-image: url('assets/undraw_begin_chat_re_v0lw.svg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 97% 97%;
+          "
+          class="dark:bg-black text-8xl text-center font-black grid place-content-center"
+        >
+          <!-- Start a conversation -->
+        </div>
+      </div>
+      <div class="diff-item-2">
+        <div
+          style="
+            background-image: url('assets/undraw_begin_chat_re_v0lw.svg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 97% 97%;
+          "
+          class="dark:bg-gray-700 bg-gray-200 text-8xl text-center font-black grid place-content-center"
+        >
+          <!-- Start a conversation -->
+        </div>
+      </div>
+      <div class="diff-resizer"></div>
+    </div>
+  </div>
+</ng-container>
