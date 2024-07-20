@@ -4,6 +4,7 @@ import * as cookieParser from 'cookie-parser';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(cookieParser());
+
   app.enableCors({
     origin: process.env.CLIENT_URI, // Allow requests from your Angular app
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
