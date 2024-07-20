@@ -27,10 +27,8 @@ export class UsersService {
 
   async userOnline(id: string) {
     let user = await this.UserRepo.findByIdAndUpdate(id, { isActive: true });
-    console.log(user, 'active');
   }
   async userOffline(id: string) {
     let user = await this.UserRepo.findByIdAndUpdate(id, { isActive: false });
-    console.log(user, 'jkfds');
   }
 }
