@@ -25,7 +25,7 @@ export class User {
   @Prop({ default: false })
   isAdmin: boolean;
 
-  @Prop({ default: true })
+  @Prop({ default: false })
   isActive: boolean;
 }
 

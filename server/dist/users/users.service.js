@@ -25,24 +25,25 @@ let UsersService = class UsersService {
         let alreadyExistingUser = await this.UserRepo.findOne({
             email: data.email,
         });
-        if (alreadyExistingUser !== null)
+        if (alreadyExistingUser !== null) {
             throw new common_1.BadRequestException('User already Exists');
-        else
+        }
+        else {
             return this.UserRepo.create(data);
+        }
     }
     async findOne(email) {
         return await this.UserRepo.findOne({ email });
     }
     async getAll() {
-        return await this.UserRepo.find();
+        let users = await this.UserRepo.find();
+        return users;
     }
     async userOnline(id) {
         let user = await this.UserRepo.findByIdAndUpdate(id, { isActive: true });
-        console.log(user, 'active');
     }
     async userOffline(id) {
         let user = await this.UserRepo.findByIdAndUpdate(id, { isActive: false });
-        console.log(user, 'jkfds');
     }
 };
 exports.UsersService = UsersService;

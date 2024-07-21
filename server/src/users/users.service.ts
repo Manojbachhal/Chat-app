@@ -12,9 +12,11 @@ export class UsersService {
       email: data.email,
     });
 
-    if (alreadyExistingUser !== null)
+    if (alreadyExistingUser !== null) {
       throw new BadRequestException('User already Exists');
-    else return this.UserRepo.create(data);
+    } else {
+      return this.UserRepo.create(data);
+    }
   }
 
   async findOne(email: string): Promise<User> {
@@ -22,7 +24,8 @@ export class UsersService {
   }
 
   async getAll(): Promise<User[]> {
-    return await this.UserRepo.find();
+    let users = await this.UserRepo.find();
+    return users;
   }
 
   async userOnline(id: string) {

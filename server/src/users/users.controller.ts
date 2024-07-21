@@ -30,7 +30,7 @@ export class UsersController {
   @Post('register')
   async register(@Body() data: usersDto) {
     const saltOrRounds = 10;
-    const name = data.email;
+    const name = data.name;
     const email = data.email;
     let password = data.password;
 
@@ -50,7 +50,7 @@ export class UsersController {
       throw new BadRequestException('User Not Found');
     }
 
-    if (!bcrypt.hashSync(data.password, user.password)) {
+    if (!bcrypt.compareSync(data.password, user.password)) {
       throw new BadRequestException('Wrong Password');
     }
 

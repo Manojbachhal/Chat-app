@@ -28,7 +28,7 @@ let UsersController = class UsersController {
     }
     async register(data) {
         const saltOrRounds = 10;
-        const name = data.email;
+        const name = data.name;
         const email = data.email;
         let password = data.password;
         password = await bcrypt.hash(password, saltOrRounds);
@@ -40,7 +40,7 @@ let UsersController = class UsersController {
         if (!user) {
             throw new common_1.BadRequestException('User Not Found');
         }
-        if (!bcrypt.hashSync(data.password, user.password)) {
+        if (!bcrypt.compareSync(data.password, user.password)) {
             throw new common_1.BadRequestException('Wrong Password');
         }
         const userObject = user.toObject();

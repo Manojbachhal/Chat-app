@@ -40,7 +40,7 @@ __decorate([
     __metadata("design:type", Boolean)
 ], User.prototype, "isAdmin", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ default: true }),
+    (0, mongoose_1.Prop)({ default: false }),
     __metadata("design:type", Boolean)
 ], User.prototype, "isActive", void 0);
 exports.User = User = __decorate([
