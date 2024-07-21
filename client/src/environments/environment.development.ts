@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:3000',
+  apiUrl: 'https://chat-app-clwu.onrender.com/',
+  // apiUrl: 'http://localhost:3000',
 };

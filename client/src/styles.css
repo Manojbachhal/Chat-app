@@ -3,9 +3,16 @@
 @tailwind components;
 @tailwind utilities;
 @import "@ctrl/ngx-emoji-mart/picker";
+@import "ngx-toastr/toastr";
 /* @dark @tailwind base; */
 /* @dark @tailwind components; */
 /* @dark @tailwind utilities; */
+.bg-red-600 {
+  background-color: rgb(220 38 38);
+}
+.bg-green-400 {
+  background-color: rgb(74 222 128);
+}
 
 *:hover {
   scrollbar-color: color-mix(in oklch, currentColor 0%, transparent) transparent;

@@ -4,6 +4,7 @@ import { RoutesService } from '../routes/routes.service';
 import { NgFor } from '@angular/common';
 import axios from 'axios';
 import { environment } from 'src/environments/environment.development';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-allusers',
@@ -15,13 +16,22 @@ import { environment } from 'src/environments/environment.development';
 export class AllusersComponent implements OnInit {
   constructor(
     private LocalStorage: LocalStorageService,
-    private RoutesService: RoutesService
+    private RoutesService: RoutesService,
+    private readonly toastService: ToastrService
   ) {}
   currentUser = this.LocalStorage.getWithExpiry('User');
-
-  userData: any = ['test'];
+  showSuccessToast(message: string) {
+    this.toastService.success(`${message}`, '', {
+      toastClass: 'ngx-toastr bg-green-400 text-white', // Add Tailwind classes here
+      closeButton: true,
+      enableHtml: true,
+      tapToDismiss: true,
+      timeOut: 3000,
+      progressBar: true,
+    });
+  }
+  userData: any = [];
   async ngOnInit() {
-    // console.log();//
     try {
       let value = this.LocalStorage.getWithExpiry('User');
       let token = value.token;
@@ -52,6 +62,7 @@ export class AllusersComponent implements OnInit {
       }
     );
     if (response.status) {
+      this.showSuccessToast('Contact added successfully');
       this.RoutesService.toggleActiveLink('contact');
     }
 

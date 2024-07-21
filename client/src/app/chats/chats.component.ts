@@ -19,7 +19,11 @@ export class ChatsComponent implements OnInit {
     private LocalStorage: LocalStorageService,
     private chatService: ChatsService,
     private readonly SocketService: SocketService
-  ) {}
+  ) // private _toastService: ToastService
+  {}
+  addInfoToast() {
+    // this._toastService.info('message');
+  }
   chatBoxVisibility: boolean = false;
   loggedinUser: any;
   value = this.LocalStorage.getWithExpiry('User');

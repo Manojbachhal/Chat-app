@@ -7,6 +7,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { ChatsService } from '../chats/chats.service';
 import { RoutesService } from '../routes/routes.service';
 import { environment } from 'src/environments/environment.development';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
@@ -18,13 +19,24 @@ export class ContactsComponent {
   constructor(
     private LocalStorage: LocalStorageService,
     private readonly chatService: ChatsService,
-    private readonly RoutesService: RoutesService
+    private readonly RoutesService: RoutesService,
+    private readonly toastService: ToastrService
   ) {}
+
   ContactData: Contact[] = [];
   value = this.LocalStorage.getWithExpiry('User');
   token = this.value.token;
   currentUser = this.value.payload;
-
+  showSuccessToast(message: string) {
+    this.toastService.success(`${message}`, '', {
+      toastClass: 'ngx-toastr bg-green-400 text-white', // Add Tailwind classes here
+      closeButton: true,
+      enableHtml: true,
+      tapToDismiss: true,
+      timeOut: 3000,
+      progressBar: true,
+    });
+  }
   // getting contacts data
   async ngOnInit() {
     let response = await axios.get('http://localhost:3000/contacts', {
@@ -52,6 +64,7 @@ export class ContactsComponent {
       },
     });
 
+    this.showSuccessToast('Ready to chat!');
     setTimeout(() => {
       this.toggleNav();
     }, 300);

@@ -7,15 +7,10 @@ import {
 } from '@angular/core';
 import { gmailValidator } from '../Validators/gmail-validator';
 import axios from 'axios';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LocalStorageService } from '../services/localStorage-service';
 import { Router } from '@angular/router';
-import { SessionChecker } from '../utils/sessionCheck';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-auth',
@@ -27,7 +22,7 @@ export class UserAuthComponent implements AfterViewInit {
     @Inject(LocalStorageService)
     private localStorageService: LocalStorageService,
     private Router: Router,
-    private Session: SessionChecker
+    private readonly toastService: ToastrService
   ) {
     axios.interceptors.request.use(
       (config) => {
@@ -46,6 +41,28 @@ export class UserAuthComponent implements AfterViewInit {
         return Promise.reject(e);
       }
     );
+  }
+
+  showSuccessToast(message: string) {
+    this.toastService.success(`${message}`, '', {
+      toastClass: 'ngx-toastr bg-green-400 text-white', // Add Tailwind classes here
+      closeButton: true,
+      enableHtml: true,
+      tapToDismiss: true,
+      timeOut: 3000,
+      progressBar: true,
+    });
+  }
+
+  showFailureToast(message: string) {
+    this.toastService.error(`${message}`, '', {
+      toastClass: 'ngx-toastr bg-red-600 text-white', // Add Tailwind classes here
+      closeButton: true,
+      enableHtml: true,
+      tapToDismiss: true,
+      timeOut: 3000,
+      progressBar: true,
+    });
   }
 
   @ViewChild('signup') signupButton!: ElementRef;
@@ -113,9 +130,11 @@ export class UserAuthComponent implements AfterViewInit {
 
         // setting response to localStorage and redirecting to dashbord
         this.localStorageService.setWithExpiry('User', response, 86400000);
+        this.showSuccessToast('Login successful!');
         this.Router.navigate(['/']);
-      } catch (error) {
-        console.log(error);
+      } catch (error: any) {
+        this.showFailureToast(error.response.data.message);
+        // console.log();
       }
       //
     } else {
@@ -132,6 +151,9 @@ export class UserAuthComponent implements AfterViewInit {
 
       if (response.data) {
         this.userForms.nativeElement.classList.remove('right-panel-active');
+        this.showSuccessToast('Signup successful!');
+
+        this.registerForm.reset();
       }
     }
   }
