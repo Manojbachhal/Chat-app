@@ -5,12 +5,19 @@ import cors from 'cors';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(cookieParser());
-  app.use(cors());
-  app.enableCors({
-    origin: process.env.CLIENT_URI, // Allow requests from your Angular app
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-    credentials: true, // Allow cookies to be sent
-  });
+  const corsConfig = {
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+  };
+  app.options('*', cors(corsConfig));
+  // app.enableCors({
+  //   origin: process.env.CLIENT_URI, // Allow requests from your Angular app
+  //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+  //   credentials: true, // Allow cookies to be sent
+  // });
 
   await app.listen(3000);
 }
