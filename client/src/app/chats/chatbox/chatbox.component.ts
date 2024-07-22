@@ -37,15 +37,11 @@ export class ChatboxComponent implements OnInit {
       this.chatBoxVisibility = vis;
     });
 
-    this.scrollToBottom();
-
     this.chatService.selectedChat$.subscribe((data) => {
       this.userData = data;
       this.getAllMessages();
       this.SocketService.toggleNotification(false);
-      // this.notification = false; //
-
-      // console.log('Received user data:', this.userData);
+      if (this.allMessages.length > 0) this.scrollToBottom();
     });
     this.loggedInUser = this.LocalStorageService.getuser();
 
@@ -55,6 +51,7 @@ export class ChatboxComponent implements OnInit {
 
       if (this.allMessages[this.allMessages.length - 1]?._id !== message._id) {
         this.allMessages.push(message);
+        this.chatService.setChatNotification(message.chat._id);
         this.SocketService.toggleNotification(true);
       }
     });
@@ -70,8 +67,10 @@ export class ChatboxComponent implements OnInit {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(res.data, 'message data');
+      // console.log(res.data, 'message data');
+      this.chatService.setChatNotification(res.data[0]._id);
       this.allMessages = res.data;
+      if (this.allMessages.length > 0) this.scrollToBottom();
     }
   }
 

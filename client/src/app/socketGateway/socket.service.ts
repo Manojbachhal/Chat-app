@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 import { LocalStorageService } from '../services/localStorage-service';
+import { environment } from 'src/environments/environment.development';
 @Injectable({
   providedIn: 'root',
 })
@@ -13,7 +14,8 @@ export class SocketService {
 
   constructor(private readonly LocalStorage: LocalStorageService) {
     let userId = this.LocalStorage.getuser()._id;
-    this.socket = io('http://localhost:3000');
+    // this.socket = io('http://localhost:3000');
+    this.socket = io(environment.apiUrl);
 
     this.socket.emit('activeState', userId);
 

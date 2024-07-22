@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from '../services/localStorage-service';
 import { RoutesService } from '../routes/routes.service';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import axios from 'axios';
 import { environment } from 'src/environments/environment.development';
 import { ToastrService } from 'ngx-toastr';
+import { User } from '../interfaces/interfaces';
 
 @Component({
   selector: 'app-allusers',
   templateUrl: './allusers.component.html',
   styleUrls: ['./allusers.component.css'],
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, NgIf],
 })
 export class AllusersComponent implements OnInit {
   constructor(
@@ -20,6 +21,8 @@ export class AllusersComponent implements OnInit {
     private readonly toastService: ToastrService
   ) {}
   currentUser = this.LocalStorage.getWithExpiry('User');
+  userData: any = [];
+
   showSuccessToast(message: string) {
     this.toastService.success(`${message}`, '', {
       toastClass: 'ngx-toastr bg-green-400 text-white', // Add Tailwind classes here
@@ -30,7 +33,7 @@ export class AllusersComponent implements OnInit {
       progressBar: true,
     });
   }
-  userData: any = [];
+
   async ngOnInit() {
     try {
       let value = this.LocalStorage.getWithExpiry('User');
@@ -41,6 +44,7 @@ export class AllusersComponent implements OnInit {
         },
       });
       this.userData = response.data;
+      console.log(this.userData, this.currentUser);
     } catch (error) {}
   }
   isLoading: boolean = false;
@@ -67,6 +71,6 @@ export class AllusersComponent implements OnInit {
     }
 
     // this.isLoading = false;
-    console.log(response);
+    // console.log(response);
   }
 }

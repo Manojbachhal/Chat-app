@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SocketModule } from './socketGateway/socket.module';
 import { ToastrModule } from 'ngx-toastr';
+import { AnimationBuilder } from '@angular/animations';
 
 @NgModule({
   declarations: [AppComponent, UserAuthComponent],

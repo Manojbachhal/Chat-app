@@ -39,7 +39,7 @@ export class ContactsComponent {
   }
   // getting contacts data
   async ngOnInit() {
-    let response = await axios.get('http://localhost:3000/contacts', {
+    let response = await axios.get(`${environment.apiUrl}/contacts`, {
       headers: {
         Authorization: `Bearer ${this.token}`,
       },

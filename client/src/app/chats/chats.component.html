@@ -67,11 +67,17 @@
                 class="rounded-full w-14 p-1 m-auto"
               />
             </div>
-            <div class="ps-2 col-span-3">
+            <div class="ps-2 col-span-3 flex">
               <p class="px-2 text-sm tracking-wider dark:text-white">
                 {{ user.name }}
               </p>
+              <!-- notification ping -->
+              <span
+                *ngIf="contact.notification"
+                class="animate-ping block h-2 w-2 rounded-full ring-2 ring-emerald-500 bg-white"
+              ></span>
             </div>
+
             <!-- medium screen button  -->
             <div
               class="hidden col-span-1 text-center bg-emerald-100 dark:bg-gray-100 rounded-full sm:flex justify-center items-center p-1.5 m-auto shadow-2xl"

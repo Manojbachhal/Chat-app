@@ -11,6 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LocalStorageService } from '../services/localStorage-service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-user-auth',
@@ -111,7 +112,7 @@ export class UserAuthComponent implements AfterViewInit {
       'Content-Type': 'application/json',
     };
     let reqOptions = {
-      url: `http://localhost:3000/users/${endpoint}`,
+      url: `${environment.apiUrl}/users/${endpoint}`,
       method: 'POST',
       headers: headersList,
       data: bodyContent,

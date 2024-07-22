@@ -18,45 +18,48 @@ export class ChatsComponent implements OnInit {
   constructor(
     private LocalStorage: LocalStorageService,
     private chatService: ChatsService,
-    private readonly SocketService: SocketService
-  ) // private _toastService: ToastService
-  {}
-  addInfoToast() {
-    // this._toastService.info('message');
-  }
+    private readonly SocketService: SocketService // private _toastService: ToastService
+  ) {}
+
   chatBoxVisibility: boolean = false;
   loggedinUser: any;
   value = this.LocalStorage.getWithExpiry('User');
   token = this.value.token;
-
+  userData: any = [];
   setChat(chatData: any) {
     this.chatService.toggleSelectedChat(chatData);
   }
 
-  userData: any = [];
   async ngOnInit() {
     this.SocketService.getChatbox().subscribe((val) => {
       this.chatBoxVisibility = val;
+    });
+    this.chatService.getChats().subscribe((res) => {
+      // console.log(res);
+      this.userData = res;
+
+      // if (this.userData.length) {
+      //   this.setupRoom();
+      // }
     });
 
     this.loggedinUser = this.LocalStorage.getuser();
 
     let value = this.LocalStorage.getWithExpiry('User');
-    // console.log();
 
     let token = value.token;
-    try {
-      // get chats data
-      let response = await axios.get(`${environment.apiUrl}/chat`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      this.userData = response.data;
-      console.log(this.userData);
+    // try {
+    //   // get chats data
+    //   let response = await axios.get(`${environment.apiUrl}/chat`, {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   });
+    //   this.userData = response.data;
+    //   console.log(this.userData);
 
-      this.setupRoom();
-    } catch (error) {}
+    //   this.setupRoom();
+    // } catch (error) {}
   }
 
   setupRoom() {

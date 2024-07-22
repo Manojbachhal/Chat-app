@@ -41,6 +41,11 @@
       <div class="ps-2 col-span-3">
         <p class="px-2 dark:text-white text-sm tracking-wider">
           {{ user.name }}
+          <sup
+            *ngIf="currentUser.payload._id == user._id"
+            class="font-bold text-green-300 dark:text-white"
+            >self</sup
+          >
         </p>
         <p class="px-2 text-xs dark:text-white">
           {{ user.email }}
