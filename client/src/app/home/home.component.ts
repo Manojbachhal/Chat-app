@@ -9,6 +9,7 @@ import { AllusersComponent } from '../allusers/allusers.component';
 import { ContactsComponent } from '../contacts/contacts.component';
 import { RoutesService } from '../routes/routes.service';
 import { SocketService } from '../socketGateway/socket.service';
+import { ChatsService } from '../chats/chats.service';
 
 @Component({
   selector: 'app-home',
@@ -30,12 +31,14 @@ export class HomeComponent implements AfterViewInit {
     private LocalStorage: LocalStorageService,
     private router: Router,
     private routesService: RoutesService,
-    private readonly SocketService: SocketService
+    private readonly SocketService: SocketService,
+    private readonly chatService: ChatsService
   ) {}
 
   @ViewChild('theme') theme: ElementRef | undefined;
   notification: boolean = false;
   chatBoxVisibility: boolean = false;
+  chatData: any[] = [];
   isSidebarOpen = true;
   activeLink = {
     Home: true,
@@ -71,6 +74,9 @@ export class HomeComponent implements AfterViewInit {
 
     this.SocketService.getChatbox().subscribe((vis) => {
       this.chatBoxVisibility = vis;
+    });
+    this.chatService.getChats().subscribe((res) => {
+      this.chatData = res;
     });
 
     this.routesService.getActiveLink().subscribe((activeLink) => {

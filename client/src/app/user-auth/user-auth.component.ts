@@ -43,6 +43,7 @@ export class UserAuthComponent implements AfterViewInit {
       }
     );
   }
+  loading: boolean = false;
 
   showSuccessToast(message: string) {
     this.toastService.success(`${message}`, '', {
@@ -126,14 +127,16 @@ export class UserAuthComponent implements AfterViewInit {
       try {
         let userData = this.loginForm.value;
         let bodyContent = JSON.stringify(userData);
-
+        this.loading = true;
         let response = await this.apiCall('login', bodyContent);
 
         // setting response to localStorage and redirecting to dashbord
         this.localStorageService.setWithExpiry('User', response, 86400000);
+        this.loading = false;
         this.showSuccessToast('Login successful!');
         this.Router.navigate(['/']);
       } catch (error: any) {
+        this.loading = false;
         this.showFailureToast(error.response.data.message);
         // console.log();
       }
