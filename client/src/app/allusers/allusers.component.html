@@ -1,5 +1,5 @@
 <div class="container h-[98%] w-full p-2 dark:bg-[#00000060]">
-  <div class="header h-[15%] bg-emerald-200 dark:bg-[#f8fafc1f] rounded">
+  <div class="header h-[15%] bg-indigo-200 dark:bg-[#f8fafc1f] rounded">
     <div class="px-2 py-4 flex transparent-bg items-center justify-between">
       <h5
         class="inline-flex px-3 text-3xl dark:text-white items-center mb-4 font-thin"
@@ -8,7 +8,7 @@
       </h5>
       <button
         data-tip="Search is not available right now will be available soon"
-        class="tooltip-left tooltip-info tooltip bg-gradient-to-r from-emerald-500 to-emerald-700 dark:from-black dark:to-gray-800 rounded-full mr-1"
+        class="tooltip-left tooltip-primary tooltip bg-gradient-to-r from-indigo-500 to-indigo-700 dark:from-black dark:to-gray-800 rounded-full mr-1"
       >
         <svg
           className="w-4 h-4 bg-gray-200"
@@ -33,7 +33,7 @@
   <div class="h-[80%] m-auto overflow-y-scroll overflow-x-hidden pt-3">
     <div
       *ngFor="let user of userData"
-      class="grid grid-cols-5 items-center justify-center mx-1 mt-2 h-18 sm:h-16 rounded-full border cursor-pointer glass hover:bg-emerald-400 dark:hover:bg-gray-700 hover:text-white"
+      class="grid grid-cols-5 items-center justify-center mx-1 mt-2 h-18 sm:h-16 rounded-full border cursor-pointer glass hover:bg-indigo-400 dark:hover:bg-gray-700 hover:text-white"
     >
       <div className="col-span-1">
         <img src="{{ user.pic }}" alt="" class="rounded-full w-14 p-1 m-auto" />
@@ -43,7 +43,7 @@
           {{ user.name }}
           <sup
             *ngIf="currentUser.payload._id == user._id"
-            class="font-bold text-green-300 dark:text-white"
+            class="font-bold text-indigo-300 dark:text-white"
             >self</sup
           >
         </p>
@@ -52,7 +52,7 @@
         </p>
       </div>
       <div
-        class="col-span-1 text-center bg-emerald-100 dark:bg-gray-100 rounded-full sm:flex justify-center items-center p-1 m-auto shadow-2xl"
+        class="col-span-1 text-center bg-indigo-100 dark:bg-gray-100 rounded-full sm:flex justify-center items-center p-1 m-auto shadow-2xl"
       >
         <!-- data-tip="Add contact" -->
         <button
@@ -64,7 +64,7 @@
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             strokeWidth="{1.5}"
-            class="size-4 fill-green-500 dark:fill-black stroke-black"
+            class="size-4 fill-indigo-500 dark:fill-black stroke-black"
           >
             <path
               strokeLinecap="round"

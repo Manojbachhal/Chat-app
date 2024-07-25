@@ -76,7 +76,7 @@ __decorate([
 exports.SocketGateway = SocketGateway = SocketGateway_1 = __decorate([
     (0, websockets_1.WebSocketGateway)({
         cors: {
-            origin: 'http://localhost:4200',
+            origin: process.env.CLIENT_URI,
             methods: ['GET', 'POST'],
             credentials: true,
         },

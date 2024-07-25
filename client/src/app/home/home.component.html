@@ -117,21 +117,21 @@
     >
       <!-- sidebar content -->
       <div
-        class="col-span-2 h-screen bg-gradient-to-r from-emerald-300 to-emerald-500 flex flex-col flex-1 dark:from-black dark:to-black"
+        class="col-span-2 h-screen bg-gradient-to-r from-indigo-700 to-indigo-500 flex flex-col flex-1 dark:from-black dark:to-black"
       >
         <nav class="flex flex-col flex-1">
           <div class="flex items-center justify-center flex-shrink-0 p-4">
             <!-- Logo -->
             <!-- <img src="assets/logo1.png" alt="" /> -->
             <button
-              class="tooltip tooltip-right tooltip-success"
+              class="tooltip tooltip-right tooltip-primary"
               data-tip="Welcome to Sphere chat"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
-                class="size-7 fill-emerald-900 dark:fill-white"
+                class="size-7 fill-indigo-200 dark:fill-white"
               >
                 <path
                   stroke-linecap="round"
@@ -145,7 +145,7 @@
             class="mt-4 p-3 m-2 rounded"
             [ngClass]="{ active: activeLink.Home }"
             [ngClass]="{
-              'bg-emerald-400 dark:bg-[#4a474763]': activeLink.Home
+              'bg-indigo-400 dark:bg-[#4a474763]': activeLink.Home
             }"
           >
             <a
@@ -155,7 +155,7 @@
             >
               <span
                 *ngIf="notification"
-                class="animate-ping absolute top-1 right-0.5 block h-2 w-2 rounded-full ring-2 ring-emerald-100 bg-white"
+                class="animate-ping absolute top-1 right-0.5 block h-2 w-2 rounded-full ring-2 ring-indigo-100 bg-white"
               ></span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -177,12 +177,12 @@
             </a>
           </div>
 
-          <!-- [ngClass]="{ 'bg-emerald-600': activeLink.contact } -->
+          <!-- [ngClass]="{ 'bg-indigo-600': activeLink.contact } -->
           <div
             class="mt-4 p-3 m-2 rounded"
             [ngClass]="{ active: activeLink.contact }"
             [ngClass]="{
-              'bg-emerald-400 dark:bg-[#4a474763]': activeLink.contact
+              'bg-indigo-400 dark:bg-[#4a474763]': activeLink.contact
             }"
           >
             <a
@@ -210,7 +210,7 @@
             class="mt-4 p-3 m-2 rounded"
             [ngClass]="{ active: activeLink.addContact }"
             [ngClass]="{
-              'bg-emerald-400 dark:bg-[#4a474763]': activeLink.addContact
+              'bg-indigo-400 dark:bg-[#4a474763]': activeLink.addContact
             }"
           >
             <a

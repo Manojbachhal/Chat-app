@@ -43,8 +43,10 @@ export class UserAuthComponent implements AfterViewInit {
       }
     );
   }
-  loading: boolean = false;
-
+  loading: boolean = true;
+  LoginContainer: boolean = true;
+  @ViewChild('signup') signupButton!: ElementRef;
+  @ViewChild('signin') loginButton!: ElementRef;
   showSuccessToast(message: string) {
     this.toastService.success(`${message}`, '', {
       toastClass: 'ngx-toastr bg-green-400 text-white', // Add Tailwind classes here
@@ -66,10 +68,6 @@ export class UserAuthComponent implements AfterViewInit {
       progressBar: true,
     });
   }
-
-  @ViewChild('signup') signupButton!: ElementRef;
-  @ViewChild('signin') loginButton!: ElementRef;
-  @ViewChild('container') userForms!: ElementRef;
 
   loginForm = new FormGroup({
     email: new FormControl('', [
@@ -96,17 +94,11 @@ export class UserAuthComponent implements AfterViewInit {
     ]),
   });
 
-  ngAfterViewInit() {
-    // Add event listener to the "Sign Up" button
-    this.signupButton.nativeElement.addEventListener('click', () => {
-      this.userForms.nativeElement.classList.add('right-panel-active');
-    });
-
-    // Add event listener to the "Login" button
-    this.loginButton.nativeElement.addEventListener('click', () => {
-      this.userForms.nativeElement.classList.remove('right-panel-active');
-    });
+  changeContainerVis() {
+    this.LoginContainer = !this.LoginContainer;
   }
+
+  ngAfterViewInit() {}
 
   async apiCall(endpoint: string, bodyContent: any) {
     let headersList = {
@@ -154,7 +146,7 @@ export class UserAuthComponent implements AfterViewInit {
       let response = await this.apiCall('register', bodyContent);
 
       if (response.data) {
-        this.userForms.nativeElement.classList.remove('right-panel-active');
+        // this.userForms.nativeElement.classList.remove('right-panel-active');
         this.showSuccessToast('Signup successful!');
 
         this.registerForm.reset();

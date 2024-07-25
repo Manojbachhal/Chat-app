@@ -6,11 +6,11 @@
     <div class="h-[10%] p-2">
       <header *ngFor="let user of userData.users">
         <div
-          class="mt-0 h-full flex gap-1 items-center border-b-[1px] border-emerald-100"
+          class="mt-0 h-full flex gap-1 items-center border-b-[1px] border-indigo-100"
           *ngIf="user._id != loggedInUser._id"
         >
           <button
-            class="sm:hidden mr-3 p-2 rounded-full bg-emerald-50"
+            class="sm:hidden mr-3 p-2 rounded-full bg-indigo-50"
             (click)="toggleChatBox()"
           >
             <svg
@@ -81,7 +81,7 @@
       <!-- </body> -->
     </div>
     <div class="h-[10%]">
-      <footer class="h-full border-t-[1px] border-emerald-100">
+      <footer class="h-full border-t-[1px] border-indigo-100">
         <div class="grid grid-cols-12 h-full">
           <div class="col-span-10 flex">
             <form
@@ -103,7 +103,7 @@
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   strokeWidth="{1.5}"
-                  class="size-6 fill-emerald-500 dark:fill-white stroke-white dark:stroke-black"
+                  class="size-6 fill-indigo-500 dark:fill-white stroke-white dark:stroke-black"
                 >
                   <path
                     strokeLinecap="round"
