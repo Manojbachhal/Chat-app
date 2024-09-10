@@ -7,7 +7,7 @@ async function bootstrap() {
   app.use(cookieParser());
 
   app.enableCors({
-    origin: process.env.CLIENT_URI, // for deployed app
+    origin: '*', // for deployed app
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true, // Allow cookies to be sent
   });
