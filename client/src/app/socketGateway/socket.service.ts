@@ -15,11 +15,7 @@ export class SocketService {
   constructor(private readonly LocalStorage: LocalStorageService) {
     let userId = this.LocalStorage.getuser()._id;
     // this.socket = io('http://localhost:3000');
-    // this.socket = io(environment.apiUrl);
-    // Enable polling explicitly in the socket connection options
-    this.socket = io(environment.apiUrl, {
-      transports: ['polling'], // Force the transport to use long polling
-    });
+    this.socket = io(environment.apiUrl);
 
     this.socket.emit('activeState', userId);
 
