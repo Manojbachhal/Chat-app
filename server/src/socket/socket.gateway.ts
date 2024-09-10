@@ -12,7 +12,7 @@ import { UsersService } from 'src/users/users.service';
 
 @WebSocketGateway({
   cors: {
-    origin: process.env.CLIENT_URI, // Allow connections from Angular app
+    origin: process.env.CLIENT_URI, // for deployed app
     methods: ['GET', 'POST'],
     credentials: true,
   },

@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  // apiUrl: 'https://chat-app-clwu.onrender.com',
-  apiUrl: 'https://server-tau-beige.vercel.app',
+  apiUrl: 'http://localhost:3000',
+  // apiUrl: 'https://server-tau-beige.vercel.app',
 };
