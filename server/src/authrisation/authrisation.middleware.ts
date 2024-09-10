@@ -15,7 +15,7 @@ export class AuthrisationMiddleware implements NestMiddleware {
       try {
         let token = authHeader.split(' ')[1];
         let decodedUser = await this.jwtService.verifyAsync(token, {
-          secret: 'test@123',
+          secret: process.env.JWT_SECRET,
         });
         req.user = decodedUser;
         next();
