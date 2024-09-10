@@ -12,11 +12,10 @@ import { UsersService } from 'src/users/users.service';
 
 @WebSocketGateway({
   cors: {
-    origin: process.env.CLIENT_URI, // Deployed app URL
-    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'], // Array format for methods
+    origin: process.env.CLIENT_URI, // for deployed app
+    methods: ['GET', 'POST'],
     credentials: true,
   },
-  transports: ['polling'], // Fallback to long polling, since Vercel doesn't support WebSockets natively
 })
 export class SocketGateway
   implements OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit
