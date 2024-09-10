@@ -7,7 +7,7 @@ async function bootstrap() {
   app.use(cookieParser());
 
   app.enableCors({
-    origin: process.env.CLIENT_URI, // Allow requests from your Angular app
+    origin: process.env.CLIENT_URI || 'http://localhost:4200', // Allow requests from your Angular app
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true, // Allow cookies to be sent
   });
