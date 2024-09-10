@@ -76,10 +76,11 @@ __decorate([
 exports.SocketGateway = SocketGateway = SocketGateway_1 = __decorate([
     (0, websockets_1.WebSocketGateway)({
         cors: {
-            origin: 'https://chat-app-henna-two.vercel.app',
-            methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+            origin: process.env.CLIENT_URI,
+            methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
             credentials: true,
         },
+        transports: ['polling'],
     }),
     __metadata("design:paramtypes", [users_service_1.UsersService])
 ], SocketGateway);
